@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{templates/cabecera}"><!-- Reemplazo de cabecera plantilla-->
+
+<head th:replace="cabecera :: head">
+    <meta charset="ISO-8859-1">
+    <title>Sistema de Administración de Personas</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+	<!-- Reemplazo de nav-->
+	<nav th:replace="cabecera :: navigation"></nav>
+
+	<!-- Reemplazo de sidebar-->
+	<div class="d-flex" id="wrapper">
+		<div th:replace="cabecera :: sidebar"></div>
+		
+	<!-- Page content wrapper-->
+		<div id="page-content-wrapper">
+			<div class="container-fluid" layout:fragment="contenido-pagina">
+	
+	
+<div class="container">
+    <h1>Sistema de Actualizacion de Proveedor</h1>
+    <hr>
+    <h2>Actualizar Proveedor</h2>
+
+
+    <form action="#" th:action="@{/proveedor/saveSupplier}" th:object="${proveedor}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{ruc}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{nombre}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{marca}" class="form-control mb-4 col-4">
+        
+        <button type="submit" class="btn btn-primary col-2"> Actualizar Proveedor</button>
+    </form>
+
+    <hr>
+
+</div>
+			</div>
+</body>
+
+</html>

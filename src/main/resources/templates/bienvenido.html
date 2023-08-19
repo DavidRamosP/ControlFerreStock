@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>My Spring Boot App</title>
+	<!-- Enlace al archivo CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<!-- Reemplazo de nav-->
+	<nav th:replace="cabecera :: navigation"></nav>
+
+	<!-- Reemplazo de sidebar-->
+	<div class="d-flex" id="wrapper">
+		<div th:replace="cabecera :: sidebar"></div>
+
+		<!-- Section: Design Block -->
+		<section class="text-center text-lg-start">
+
+			<style>
+				.cascading-right {
+					margin-right: -50px;
+
+				}
+
+				@media (max-width: 991.98px) {
+					.cascading-right {
+						margin-right: 0;
+
+					}
+				}
+			</style>
+
+			<!-- Jumbotron -->
+			<div class="container py-3">
+				<div class="row g-0 align-items-top">
+					<div class="col-lg-6 mb-5 mb-lg-0">
+						<div class="card cascading-right" style="
+				            background: hsla(0, 0%, 100%, 0.10);
+				            backdrop-filter: blur(30px);
+				            ">
+							<div class="card-body p-5 shadow-5 text-center">
+								<h2 class="fw-bold mb-5">Bienvenido</h2>
+								<h3><span sec:authentication="principal.username"/></h3>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="col-lg-6 mb-5 mb-lg-0">
+						<img src="https://firebasestorage.googleapis.com/v0/b/cibertec-ios-2023---bm.appspot.com/o/ferreteria.png?alt=media&token=400222b0-90c2-4c9b-bab9-59cba95def80"
+							alt="" />
+					</div>
+				</div>
+			</div>
+			<!-- Jumbotron -->
+		</section>
+		<!-- Section: Design Block -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+		<script src="js/custom.js"></script>
+
+
+
+</body>
+
+</html>

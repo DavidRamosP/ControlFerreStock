@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{templates/cabecera}"><!-- Reemplazo de cabecera plantilla-->
+
+<head th:replace="cabecera :: head">
+	<meta charset="UTF-8">
+	<title>Sistema de Administración de Empresas Cliente</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+
+	<!-- Reemplazo de nav-->
+	<nav th:replace="cabecera :: navigation"></nav>
+
+	<!-- Reemplazo de sidebar-->
+	<div class="d-flex" id="wrapper">
+		<div th:replace="cabecera :: sidebar"></div>
+
+		<!-- Page content wrapper-->
+		<div id="page-content-wrapper" sec:authorize="isAuthenticated()">
+			<div class="container-fluid" layout:fragment="contenido-pagina">
+
+				<div class="container my-3">
+
+					<div class="card-body p-1 shadow-5 text-center">
+						<h1 style="color: black;">LISTA DE PRODUCTOS</h1>
+					</div>
+
+				
+				</div>
+
+
+
+				<!-- Page content-->
+				<div class="container-fluid" layout:fragment="contenido-pagina" >
+
+					<table border="1" class="table table-striped table-responsive-md">
+						<thead class="thead-dark">
+							<tr>
+								<th>SKU</th>
+								<th>Descripcion</th>
+								<th>Precio</th>
+								<th>PROVEEDOR</th>
+								<th>UNIDAD</th>
+								<th class="col-2"> Actions </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="pro : ${productos}">
+								<td th:text="${pro.sku}"></td>
+								<td th:text="${pro.nombre}"></td>
+								<td th:text="${pro.precio}"></td>
+								<td th:text="${pro.proveedor.nombre}"></td>
+								<td th:text="${pro.unidad.nombre}"></td>
+								
+								<td> <a th:href="@{/productos/updateProduct/{id}(id=${pro.sku})}"
+										class="btn btn-primary">Update</a>
+									<a th:href="@{/productos/deleteProduct/{id}(id=${pro.sku})}" class="btn btn-danger">Delete</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+
+				</div>
+
+
+			</div>
+
+			<!--OTRO SCRIPTS PARA PAGINAS-->
+			<th:block layout:fragment="page-scripts">
+
+				<div id="contenedor" class="card-body p-5 shadow-5 justify-content-center">
+					<div th:if="${paginasTotalesPro>1}" class="container my-2 justify-content-center ">
+						<div class="row col-sm-10 justify-content-center">
+							<div class="row col-sm-12 justify-content-center">
+								<h4>Total de registros: [[${cantidadElementosPro}]]</h4>
+							</div>
+							<div class="d-flex">
+								<span th:each="i : ${#numbers.sequence(1,paginasTotalesPro)}">
+									<a th:if="${paginaActualPro != i}" th:href="@{'/productos/page/'+${i}}"
+										class="btn btn-primary m-1" a>[[${i}]]</a>
+									<span th:unless="${paginaActualPro != i}" class="btn btn-success m-1">[[${i}]]</span>
+								</span>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</th:block>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

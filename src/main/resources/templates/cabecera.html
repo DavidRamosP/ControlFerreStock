@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:fragment="head">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Aplicacion de Control de Stock</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+
+
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="d-flex" id="wrapper">
+		<!-- Sidebar-->
+		<div th:fragment="sidebar" class="border-end bg-gray text-center" id="sidebar-wrapper" sec:authorize="isAuthenticated()">
+			<div class="sidebar-heading border-bottom bg-light p-3 text-left">MENÚ</div>
+			<div class="list-group list-group-flush">
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/tiendas/">Lista de Tiendas</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+					href="/tiendas/newStore">Agregar tienda</a>
+
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/productos/">Lista de Productos</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+					href="/productos/newProduct">Agregar Producto</a>
+
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/proveedor/">Lista de Proveedores</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5	"
+					href="/proveedor/newSupplier">Agregar Proveedor</a>
+
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/logout">Cerrar Sesión
+					</a>
+
+			</div>
+			
+			
+		</div>
+		<!-- Page content wrapper-->
+		<div id="page-content-wrapper">
+			<!-- Top navigation-->
+			<nav th:fragment="navigation"
+				class="navbar navbar-expand-lg navbar-light bg-black border-bottom text-white p-2">
+				<div class="container-fluid">
+					<i class="fa-regular fa-user"></i>
+					<a class="navbar-brand text-white item-center" th:href="@{/bienvenido}">
+						<h2>Control de Stock</h2>
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active text-white item-center fs-4" aria-current="page"
+									th:href="@{/bienvenido}">Home</a>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-white p-3" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Tiendas
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item " th:href="@{/tiendas/}">Lista Tiendas</a></li>
+									<li><a class="dropdown-item" th:href="@{/tiendas/newStore}">Agregar Tienda</a></li>
+
+								</ul>
+							</li>
+
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-white p-3" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Proveedores
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" th:href="@{/proveedor/}">Lista Proveedores</a></li>
+									<li><a class="dropdown-item" th:href="@{/proveedor/newSupplier}">Agregar
+											Proveedor</a></li>
+								</ul>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-white p-3" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Productos
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" th:href="@{/productos/}">Lista Productos</a></li>
+									<li><a class="dropdown-item" th:href="@{/productos/newProduct}">Agregar Producto</a>
+									</li>
+								</ul>
+							</li>
+
+
+
+						</ul>
+
+
+
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation"><span
+								class="navbar-toggler-icon"></span></button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+								<div class="m-2">Bienvenido : <span sec:authentication="principal.username" /></div>
+								<div class="m-2"> Perfil: <span sec:authentication="principal.authorities" /></div>
+								<li class="nav-item active"><a class="nav-link" href="/logout">SALIR</a></li>
+							</ul>
+						</div>
+					</div>
+			</nav>
+			<!-- Page content-->
+			<div class="container-fluid" layout:fragment="contenido-pagina">
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JS-->
+	<script src="@{/js/bootstrap.bundle.min.js}"></script>
+	<!-- Core theme JS-->
+	<script src="@{/js/scripts.js"></script>
+
+	<!--OTRO SCRIPTS PARA PAGINAS-->
+	<th:block layout:fragment="page-scripts">
+
+	</th:block>
+</body>
