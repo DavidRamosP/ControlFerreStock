@@ -18,7 +18,10 @@ public class SecurityConfigLogin {
 		http.csrf().disable()
 		.authorizeHttpRequests()
 		.requestMatchers("/registration").permitAll()
-		.requestMatchers("/tiendas").permitAll()
+		.requestMatchers("/tiendas/").hasAnyRole("USER", "ADMIN")
+		.requestMatchers("/tiendas/newStore", "/tiendas/updateStore", 
+						"/productos/newProduct","/productos/updateProduct",
+						"/proveedor/newSupplier","/proveedor/updateSupplier").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
@@ -33,7 +36,7 @@ public class SecurityConfigLogin {
 		.permitAll()
 		.and()
 		.exceptionHandling()
-		.accessDeniedPage("/accessDeniedPage");
+		.accessDeniedPage("/accessDenied");
 		
 		
 		return http.build();

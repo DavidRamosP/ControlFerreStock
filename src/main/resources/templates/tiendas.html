@@ -47,35 +47,42 @@
 
 
 
-				<!-- Page content-->
-				<div class="container-fluid" layout:fragment="contenido-pagina" >
+			<!-- Page content-->
+			<div class="container-fluid" layout:fragment="contenido-pagina" >
 
-					<table border="1" class="table table-striped table-responsive-md">
-						<thead class="thead-dark">
-							<tr>
-								<th>Cod</th>
-								<th>Nro de RUC</th>
-								<th>Razon Social</th>
-								<th>Dirección de Empresa</th>
-								<th class="col-2"> Actions </th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="tienda : ${tiendas}">
-								<td th:text="${tienda.id}"></td>
-								<td th:text="${tienda.ruc}"></td>
-								<td th:text="${tienda.nombre}"></td>
-								<td th:text="${tienda.direccion}"></td>
-								<td> <a th:href="@{/tiendas/updateStore/{id}(id=${tienda.id})}"
-										class="btn btn-primary">Update</a>
-									<a th:href="@{/tiendas/deleteStore/{id}(id=${tienda.id})}" class="btn btn-danger">Delete</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				<table border="1" class="table table-striped table-responsive-md">
+					<thead class="thead-dark">
+						<tr>
+							<th>Cod</th>
+							<th>Nro de RUC</th>
+							<th>Razon Social</th>
+							<th>Dirección de Empresa</th>
+							<th
+								class="col-3"> Actions 
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="tienda : ${tiendas}">
+							<td th:text="${tienda.id}"></td>
+							<td th:text="${tienda.ruc}"></td>
+							<td th:text="${tienda.nombre}"></td>
+							<td th:text="${tienda.direccion}"></td>
+							<td>
+								<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+								th:href="@{/tiendas/updateStore/{id}(id=${tienda.id})}"
+									class="btn btn-primary">Update</a>
+								<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+								 th:href="@{/tiendas/deleteStore/{id}(id=${tienda.id})}" class="btn btn-danger">Delete</a>
+							<a th:href="@{/productosTienda/{id}(id=${tienda.id})}" class="btn btn-success">Ver Productos</a>
+							
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
 
-				</div>
+			</div>
 
 
 			</div>

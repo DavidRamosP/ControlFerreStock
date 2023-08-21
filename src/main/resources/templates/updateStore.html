@@ -3,10 +3,11 @@
 	layout:decorate="~{templates/cabecera}"><!-- Reemplazo de cabecera plantilla-->
 
 <head th:replace="cabecera :: head">
-    <meta charset="ISO-8859-1">
-    <title>Sistema de Administración de Personas</title>
+	<meta charset="ISO-8859-1">
+	<title>Actualizacion de tiendas</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
@@ -16,36 +17,38 @@
 	<!-- Reemplazo de sidebar-->
 	<div class="d-flex" id="wrapper">
 		<div th:replace="cabecera :: sidebar"></div>
-		
-	<!-- Page content wrapper-->
+
+		<!-- Page content wrapper-->
 		<div id="page-content-wrapper">
 			<div class="container-fluid" layout:fragment="contenido-pagina">
-	
-	
-<div class="container">
-    <h1>Sistema de Actualizacion de Tienda</h1>
-    <hr>
-    <h2>Actualizar Tienda</h2>
 
 
-    <form action="#" th:action="@{/tiendas/saveStore}" th:object="${tienda}" method="post">
+				<div class="container">
+					<h1>Sistema de Actualizacion de Tienda</h1>
+					<hr>
 
-        <!-- Add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+					<div class="row col-md-6 offset-md-3">
+						<h2>Actualizar Tienda</h2>
 
-        <input type="text" th:field="*{ruc}" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{nombre}" class="form-control mb-4 col-4">
+						<form action="#" th:action="@{/tiendas/saveStore}" th:object="${tienda}" method="post">
 
-        <input type="text" th:field="*{direccion}" class="form-control mb-4 col-4">
-        
-        <button type="submit" class="btn btn-primary col-2"> Actualizar Tienda</button>
-    </form>
+							<!-- Add hidden form field to handle update -->
+							<input type="hidden" th:field="*{id}" />
 
-    <hr>
+							<input type="text" th:field="*{ruc}" class="form-control mb-4 col-4">
 
-    <!--<a th:href="@{/}"> Regresar a Listado de Tiendas</a> -->
-</div>
+							<input type="text" th:field="*{nombre}" class="form-control mb-4 col-4">
+
+							<input type="text" th:field="*{direccion}" class="form-control mb-4 col-4">
+
+							<button type="submit" class="btn btn-primary col-auto"> Actualizar Tienda</button>
+						</form>
+					</div>
+					<hr>
+
+					<!--<a th:href="@{/}"> Regresar a Listado de Tiendas</a> -->
+				</div>
 			</div>
 </body>
 

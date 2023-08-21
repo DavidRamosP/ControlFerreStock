@@ -7,4 +7,6 @@ import com.cibertec.FerreStockApp.model.TipoUnidad;
 public interface TipoUnidadService {
 
 	List<TipoUnidad> listarUnidades();
+	void agregarUnidades(TipoUnidad tipoUnidad);
 }
+

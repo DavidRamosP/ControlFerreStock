@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cibertec.FerreStockApp.model.Producto;
+import com.cibertec.FerreStockApp.model.TipoUnidad;
 import com.cibertec.FerreStockApp.service.impl.ProductoServiceImpl;
 import com.cibertec.FerreStockApp.service.impl.ProveedorServiceImpl;
 import com.cibertec.FerreStockApp.service.impl.TipoUnidadesServiceImpl;
@@ -54,7 +55,7 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/saveProduct")
-	public String guardarProducto(@ModelAttribute("producto" )Producto producto, Model model){	
+	public String guardarProducto(@ModelAttribute("producto")Producto producto, Model model){	
 		service.nuevoProducto(producto);
 		return "redirect:/productos/";
 	}
@@ -72,6 +73,19 @@ public class ProductoController {
 	@GetMapping("/deleteProduct/{id}")
 	public String eliminarTienda(@PathVariable(value = "id")int id) {
 		service.eliminarProducto(id);
+		return "redirect:/productos/";
+	}
+	
+	@GetMapping("/tipoUnidad")
+	public String agregarUnidad(Model model) {
+		model.addAttribute("tipoUnidad", new TipoUnidad());
+		return "newTipoUnidad";
+	}
+	
+	
+	@PostMapping("/tipoUnidad")
+	public String guardarUnidad(@ModelAttribute("tipoUnidad")TipoUnidad tipoUnidad) {
+		serviceTipos.agregarUnidades(tipoUnidad);
 		return "redirect:/productos/";
 	}
 	

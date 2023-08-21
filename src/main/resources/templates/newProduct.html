@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{templates/cabecera}">
 
-<head th:replace="cabecera :: head">
+<head th:replace="cabecera :: head" >
 	<meta charset="UTF-8">
 	<title>NuevoProducto</title>
 
@@ -21,13 +21,15 @@
 		<div th:replace="cabecera :: sidebar"></div>
 
 
-		<div class="container-fluid" layout:fragment="contenido-pagina">
+		<div class="container-fluid" layout:fragment="contenido-pagina" >
 
-			<div class="container">
+			<div class="container ">
 				<h1>Sistema de Registro de Nuevo Producto</h1>
 				<hr>
-				<h2>Nuevo Producto</h2>
-
+				
+	 	
+			<div class="row col-md-6 offset-md-3">
+				<h2 class="mb-4">Nuevo Producto</h2>
 				<form action="#" th:action="@{/productos/saveProduct}" th:object="${producto}" method="POST">
 					<input type="text" th:field="*{nombre}" placeholder="Ingrese el nombre del Producto"
 						class="form-control mb-4 col-4">
@@ -50,7 +52,7 @@
 						</th:block>
 					</select>
 
-					<button type="submit" class="btn btn-primary col-2"> Guardar Producto</button>
+					<button type="submit" class="btn btn-primary col-auto"> Guardar Producto</button>
 				</form>
 
 				<hr>

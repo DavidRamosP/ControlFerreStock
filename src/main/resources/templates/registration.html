@@ -1,62 +1,186 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <title>Registration</title>
+	 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	
+	<title>Registro Formulario</title>
 </head>
-<body>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-6 mx-auto">
-            <form
-                    method="post"
-                    role="form"
-                    th:action="@{/registration}"
-                    th:object="${usuario}"
-            >
-                <h1>Formulario de Registro</h1>
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">
-                        Registration successful !!!
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input class="form-control" id="username" name="username"  th:field="*{username}" type="text">
-                    <p class="text-danger" th:errors="*{username}"
-                       th:if="${#fields.hasErrors('username')}"></p>
-                </div>
-               
-                <div class="mb-3">
-                    <label class="col-sm-2 col-form-label" for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password"  th:field="*{password}">
-                    <p class="text-danger" th:errors="*{password}"
-                       th:if="${#fields.hasErrors('password')}"></p>
-                </div>
-                
-               
-                
-                
-                
-                
-                
-                <div class="mb-3">
-                    <button class="btn btn-primary mb-3" type="submit">Registrar</button>
-                     <a class="btn btn-link-primary mb-3" th:href="@{/login}"> Ir a Login</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+	<style>
+		.cascading-right {
+			margin-right: -50px;
+			margin-left: 10px;
+		}
+	
+		@media (max-width: 991.98px) {
+			.cascading-right {
+				margin-right: 0;
+	
+	
+			}
+		}
+  </style>
 
 
-<script crossorigin="anonymous"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<body style="background:rgb(185, 227, 208);">
+	<div id="page-content-wrapper">
+		  <!-- nav -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-black border-bottom text-white p-2">
+		<div class="container-fluid">
+			<i class="fa-regular fa-user"></i>
+			<a class="navbar-brand text-white item-center" th:href="@{/login}">
+				<h2>Control de Stock</h2>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active text-white item-center fs-4" aria-current="page"
+							th:href="@{/registration}">Registrar Usuario</a>
+					</li>
+	
+				</ul>
+	
+	
+	
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto m-2  mt-lg-0">
+						<li class="nav-item active"><a class="nav-link text-white" href="/Login">LOGIN</a></li>
+					</ul>
+				</div>
+			</div>
+	</nav>
+	</div>
+	
+
+  
+  
+	
+	<div class="container py-4 col-12">
+    <div class="row g-0 align-items-top">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="card cascading-right p-4" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+				<form class="px-1" method="post" role="form" th:action="@{/registration}" th:object="${usuario}">
+					<div class="mb-3 text-center">
+						<h1>Formulario de Registro</h1>
+					</div>
+					<div th:if="${param.success}">
+						<div class="alert alert-info">
+							Registro exitoso!!!
+						</div>
+					</div>
+					
+					<p class="mt-4 ms-3" style="color: black;">Datos de Personales: </p>
+					<div class="card cascading-right p-3 ms-3 mb-3 col-11">
+						<div class="mb-1">
+							<label class="form-label" for="nombres">Nombres</label>
+							<input class="form-control" id="nombres" name="nombres" th:field="*{nombres}"
+								type="text">
+							<p class="text-danger" th:errors="*{nombres}" th:if="${#fields.hasErrors('nombres')}"></p>
+						</div>
+
+						<div class="mb-1">
+							<label class="col-sm-2 col-form-label" for="apellidos">Apellidos</label>
+							<input class="form-control" id="apellidos" name="apellidos" type="text"
+								th:field="*{apellidos}">
+							<p class="text-danger" th:errors="*{apellidos}" th:if="${#fields.hasErrors('apellidos')}"></p>
+						</div>
+						
+						<div class="mb-1">
+							<label class="form-label" for="dni">DNI</label>
+							<input class="form-control" id="dni" name="username" th:field="*{dni}"
+								type="text">
+							<p class="text-danger" th:errors="*{dni}" th:if="${#fields.hasErrors('dni')}"></p>
+						</div>
+						
+						<div class="mb-1">
+							<label class="form-label" for="email">Email</label>
+							<input class="form-control" id="email" name="email" th:field="*{email}"
+								type="email">
+							<p class="text-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
+						</div>
+						
+						<div class="mb-1">
+							<label class="form-label" for="sexo">Sexo</label>
+						<select th:field="*{sexo}" required class="form-control mb-4 col-4">
+							<th:block >
+								<option th:text="Seleccione" th:value="SN"></option>
+								<option th:text="Masculino" th:value="M"></option>
+								<option th:text="Femenino" th:value="F"></option>
+							</th:block>
+						</select>
+			
+						</div>
+						
+						
+					
+					<div class="mb-1">
+							<label class="form-label" for="cargo">Cargo</label>
+							
+						
+						<select th:field="*{cargo}" required class="form-control mb-4 col-4">
+							<th:block >
+								<option th:text="Seleccione" th:value="No"></option>
+								<option th:text="Asistente" th:value="Asistente"></option>
+								<option th:text="Analista" th:value="Analista"></option>
+								<option th:text="Gerente" th:value="Gerente"></option>
+							</th:block>
+						</select>		
+					</div>
+
+					</div>
+
+					<p class="mt-4 ms-3" style="color: black;">Datos de Logueo: </p>
+					<div class="card cascading-right p-3 mb-3 ms-3 col-11">
+						<div class="mb-1">
+							<label class="form-label" for="username">Username</label>
+							<input class="form-control" id="username" name="username" th:field="*{username}"
+								type="text">
+							<p class="text-danger" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></p>
+						</div>
+
+						<div class="mb-1">
+							<label class="col-sm-2 col-form-label" for="password">Password</label>
+							<input class="form-control" id="password" name="password" type="password"
+								th:field="*{password}">
+							<p class="text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+						</div>
+
+
+
+						<div class="m-1">
+							<button class="btn btn-primary mb-1" type="submit">Registrar</button>
+							<a class="btn btn-$blue-100 mb-1" th:href="@{/login}"> Ir a Login</a>
+						</div>
+
+					</div>
+				</form>
+			</div>
+			
+		</div>
+		
+		<div class="col-lg-6 mb-5 mb-lg-0">
+			<img src="https://firebasestorage.googleapis.com/v0/b/cibertec-ios-2023---bm.appspot.com/o/ferreteria.png?alt=media&token=400222b0-90c2-4c9b-bab9-59cba95def80"alt="logoferreteria" />
+		</div>
+	</div>
+	</div>
+
+	<script crossorigin="anonymous" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

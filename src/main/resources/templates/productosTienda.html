@@ -5,7 +5,7 @@
 
 <head th:replace="cabecera :: head">
 	<meta charset="UTF-8">
-	<title>Sistema de Administración de Empresas Cliente</title>
+	<title>Lista de Productos</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -29,43 +29,50 @@
 				<div class="container my-3">
 
 					<div class="card-body p-1 shadow-5 text-center">
-						<h1 style="color: black;">LISTA DE PRODUCTOS</h1>
+						<h1 style="color: black;">LISTA DE PRODUCTOS POR TIENDA</h1>
 					</div>
 
 				
 				</div>
 
 
+				
+
 
 				<!-- Page content-->
 				<div class="container-fluid" layout:fragment="contenido-pagina" >
+					<div class="alert alert-primary p-1">
+							<scope class="fs-3">La Tienda: </scope>
+							<scope style="color: black;" class="fs-2" th:text="${tiendaElegida.nombre}"></scope>
+					</div>
 
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<a th:href="@{/productoTienda}"	class="btn btn-warning col-2 mb-4 mr-8 align-items-center">+ Agregar Producto</a>		
+					</div>
+						
 					<table border="1" class="table table-striped table-responsive-md">
 						<thead class="thead-dark">
 							<tr>
-								<th>SKU</th>
-								<th>Descripcion</th>
+								<th>Cod Trx</th>
+								<th>Nombre de Producto</th>
 								<th>Precio</th>
-								<th>PROVEEDOR</th>
-								<th>UNIDAD</th>
-								<th sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="col-2"> Actions </th>
+								<th>Tienda</th>
+								<th>Cantidad</th>
+								<th class="col-2"> Actions </th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="pro : ${productos}">
-								<td th:text="${pro.sku}"></td>
-								<td th:text="${pro.nombre}"></td>
-								<td th:text="${pro.precio}"></td>
-								<td th:text="${pro.proveedor.nombre}"></td>
-								<td th:text="${pro.unidad.nombre}"></td>
+							<tr th:each="pro : ${productosTienda}">
+								<td th:text="${pro.id}"></td>
+								<td th:text="${pro.producto.nombre}"></td>
+								<td th:text="${pro.producto.precio}"></td>
+								<td th:text="${pro.tienda.nombre}"></td>
+								<td th:text="${pro.stock}"></td>
 								
 								<td> 
-									<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
-									th:href="@{/productos/updateProduct/{id}(id=${pro.sku})}"
+									<a th:href="@{/actualizarProductoTienda/{id}(id=${pro.id})}"
 										class="btn btn-primary">Update</a>
-										
-									<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
-									th:href="@{/productos/deleteProduct/{id}(id=${pro.sku})}" class="btn btn-danger">Delete</a>
+									<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"th:href="@{/eliminarProductoTienda/{id}(id=${pro.id})}" class="btn btn-danger">Delete</a>
 								</td>
 							</tr>
 						</tbody>
@@ -78,7 +85,7 @@
 			</div>
 
 			<!--OTRO SCRIPTS PARA PAGINAS-->
-			<th:block layout:fragment="page-scripts">
+			<!--<th:block layout:fragment="page-scripts">
 
 				<div id="contenedor" class="card-body p-5 shadow-5 justify-content-center">
 					<div th:if="${paginasTotalesPro>1}" class="container my-2 justify-content-center ">
@@ -99,7 +106,7 @@
 
 				</div>
 			</th:block>
-
+-->
 		</div>
 
 	</div>

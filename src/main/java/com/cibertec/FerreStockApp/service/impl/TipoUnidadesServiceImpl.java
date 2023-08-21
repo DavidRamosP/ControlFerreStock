@@ -21,4 +21,9 @@ public class TipoUnidadesServiceImpl implements TipoUnidadService {
 		return repository.findAll();
 	}
 
+	@Override
+	public void agregarUnidades(TipoUnidad tipoUnidad) {
+		repository.save(tipoUnidad);
+	}
+
 }

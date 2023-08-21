@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{templates/cabecera}">
+
+<head th:replace="cabecera :: head">
+	<meta charset="UTF-8">
+	<title>NuevoProductoTienda</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+
+<body>
+	<!-- Reemplazo de nav-->
+	<nav th:replace="cabecera :: navigation"></nav>
+
+	<!-- Reemplazo de sidebar-->
+	<div class="d-flex" id="wrapper">
+		<div th:replace="cabecera :: sidebar"></div>
+
+
+		<div class="container-fluid" layout:fragment="contenido-pagina">
+
+			<div class="container">
+				<h1>Sistema de Actualización de Producto Tienda</h1>
+				<hr>
+				
+				<div class="row col-md-6 offset-md-3">
+				<h2>Actualización de Producto</h2>
+
+				<form action="#" th:action="@{/productoTienda}" th:object="${productoTienda}" method="POST">
+					
+					<input type="hidden" th:field="*{id}">
+
+					<select th:field="*{producto}" required class="form-control mb-4 col-4">
+						<th:block th:each="producto : ${productos}">
+							<option th:text="${producto.nombre}" th:value="${producto.sku}"></option>
+
+						</th:block>
+					</select>
+
+					<select th:field="*{tienda}" required class="form-control mb-4 col-4">
+						<th:block th:each="tienda : ${tiendas}">
+							<option th:text="${tienda.nombre}" th:value="${tienda.id}"></option>
+
+						</th:block>
+					</select>
+					
+						<input type="text" th:field="*{stock}" placeholder="Ingrese el stock"
+						class="form-control mb-4 col-4">
+
+
+
+					<button type="submit" class="btn btn-primary col-auto"> Guardar Stock</button>
+				</form>
+
+</div>
+				<hr>
+
+				<!-- <a th:href="@{/}"> Regresar a Lista de Tiendas</a> -->
+			</div>
+
+
+		</div>
+	</div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My Spring Boot App</title>
+    <title>Iniciar Sesión</title>
     <!-- Enlace al archivo CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
@@ -11,31 +11,65 @@
 	
   		<!-- Section: Design Block -->
 <section class="text-center text-lg-start" >
+	<style>
+		.cascading-right {
+			margin-right: -120px;
+			margin-left: 450px;
+		}
 	
-  <style>
-    .cascading-right {
-      margin-right: -50px;
-      
-    }
-
-    @media (max-width: 991.98px) {
-      .cascading-right {
-        margin-right: 0;
-        
-      }
-    }
+		@media (max-width: 991.98px) {
+			.cascading-right {
+				margin-right: 0;
+	
+	
+			}
+		}
   </style>
 
+  <!-- nav -->
+	<nav th:fragment="navigation" class="navbar navbar-expand-lg navbar-light bg-black border-bottom text-white p-2">
+		<div class="container-fluid">
+			<i class="fa-regular fa-user"></i>
+			<a class="navbar-brand text-white item-center" th:href="@{/login}">
+				<h2>Control de Stock</h2>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active text-white item-center fs-4" aria-current="page"
+							th:href="@{/registration}">Registrar Usuario</a>
+					</li>
+	
+				</ul>
+	
+	
+	
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto m-2  mt-lg-0">
+						<li class="nav-item active"><a class="nav-link text-white" href="/Login">LOGIN</a></li>
+					</ul>
+				</div>
+			</div>
+	</nav>
+  
+  
   <!-- Jumbotron -->
   <div class="container py-4">
-    <div class="row g-0 align-items-center">
+    <div class="row g-0 align-items-top">
       <div class="col-lg-6 mb-5 mb-lg-0">
         <div class="card cascading-right" style="
             background: hsla(0, 0%, 100%, 0.55);
             backdrop-filter: blur(30px);
             ">
           <div class="card-body p-5 shadow-5 text-center">
-            <h2 class="fw-bold mb-5">Iniciar Sesion</h2>
+            <h2 class="fw-bold mb-5">Iniciar Sesión</h2>
              <div th:if="${param.error}">
                 <div class="alert alert-danger">Invalid Email or Password !!!</div>
             </div>
@@ -64,7 +98,7 @@
                 INICIAR SESION
               </button>
               <a class="btn btn-link btn-block mb-4" th:href="@{/registration}">
-				  Registrate</a>
+				  Registrar</a>
             
             </form>
           </div>
@@ -74,8 +108,7 @@
     
     
       <div class="col-lg-6 mb-5 mb-lg-0">
-        <img src="https://firebasestorage.googleapis.com/v0/b/cibertec-ios-2023---bm.appspot.com/o/ferreteria.png?alt=media&token=400222b0-90c2-4c9b-bab9-59cba95def80"
-          alt="" />
+        <img src="https://firebasestorage.googleapis.com/v0/b/cibertec-ios-2023---bm.appspot.com/o/ferreteria.png?alt=media&token=400222b0-90c2-4c9b-bab9-59cba95def80" alt="logoferreteria" />
       </div>
     </div>
   </div>

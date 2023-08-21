@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:fragment="head">
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -13,27 +13,38 @@
 
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<!-- Bootstrap core JS-->
 </head>
 
 <body>
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
-		<div th:fragment="sidebar" class="border-end bg-gray text-center" id="sidebar-wrapper" sec:authorize="isAuthenticated()">
-			<div class="sidebar-heading border-bottom bg-light p-3 text-left">MENÚ</div>
+		<div th:fragment="sidebar" class="border-end bg-gray text-center" id="sidebar-wrapper"  sec:authorize="isAuthenticated()">
+			<div class="sidebar-heading border-bottom bg-black text-white p-3 text-left">MENÚ</div>
 			<div class="list-group list-group-flush">
-				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/tiendas/">Lista de Tiendas</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+				<a  class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+					 href="/tiendas/" >Lista de Tiendas</a>
+				<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
 					href="/tiendas/newStore">Agregar tienda</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5 text-black"
+					href="/productoTienda">Agregar Nuevo Stock</a>
 
 				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/productos/">Lista de Productos</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+				<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
 					href="/productos/newProduct">Agregar Producto</a>
+				
+				<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="list-group-item list-group-item-action list-group-item-light p-3 fs-5"
+					href="/productos/tipoUnidad">Agregar Unidad</a>
+					
+					
 
 				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/proveedor/">Lista de Proveedores</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5	"
+				<a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="list-group-item list-group-item-action list-group-item-light p-3 fs-5	"
 					href="/proveedor/newSupplier">Agregar Proveedor</a>
 
-				<a class="list-group-item list-group-item-action list-group-item-light p-3 fs-5" href="/logout">Cerrar Sesión
+				<a class="list-group-item list-group-item-action list-group-item-d p-3 fs-5 " href="/logout">Cerrar Sesión
 					</a>
 
 			</div>
@@ -59,7 +70,7 @@
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
 								<a class="nav-link active text-white item-center fs-4" aria-current="page"
-									th:href="@{/bienvenido}">Home</a>
+									th:href="@{/bienvenido}">Inicio</a>
 							</li>
 
 							<li class="nav-item dropdown">
@@ -69,8 +80,10 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><a class="dropdown-item " th:href="@{/tiendas/}">Lista Tiendas</a></li>
-									<li><a class="dropdown-item" th:href="@{/tiendas/newStore}">Agregar Tienda</a></li>
+									<li><a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/tiendas/newStore}">Agregar Tienda</a></li>
+									<li><a class="dropdown-item" th:href="@{/productoTienda}">Agregar Nuevo Stock</a></li>
 
+									
 								</ul>
 							</li>
 
@@ -82,7 +95,7 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><a class="dropdown-item" th:href="@{/proveedor/}">Lista Proveedores</a></li>
-									<li><a class="dropdown-item" th:href="@{/proveedor/newSupplier}">Agregar
+									<li><a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/proveedor/newSupplier}">Agregar
 											Proveedor</a></li>
 								</ul>
 							</li>
@@ -94,7 +107,19 @@
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><a class="dropdown-item" th:href="@{/productos/}">Lista Productos</a></li>
-									<li><a class="dropdown-item" th:href="@{/productos/newProduct}">Agregar Producto</a>
+									<li><a sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="dropdown-item" th:href="@{/productos/newProduct}">Agregar Producto</a>
+									</li>
+								</ul>
+							</li>
+							
+							<li sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-white p-3" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Tipo de Unidad
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								
+									<li><a class="dropdown-item" th:href="@{/productos/tipoUnidad}">Agregar Unidad de medida</a>
 									</li>
 								</ul>
 							</li>
@@ -113,7 +138,7 @@
 							<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
 								<div class="m-2">Bienvenido : <span sec:authentication="principal.username" /></div>
 								<div class="m-2"> Perfil: <span sec:authentication="principal.authorities" /></div>
-								<li class="nav-item active"><a class="nav-link" href="/logout">SALIR</a></li>
+								<li class="nav-item active"><a class="nav-link text-white" href="/logout">SALIR</a></li>
 							</ul>
 						</div>
 					</div>
@@ -127,7 +152,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Bootstrap core JS-->
 	<script src="@{/js/bootstrap.bundle.min.js}"></script>
 	<!-- Core theme JS-->
 	<script src="@{/js/scripts.js"></script>

@@ -4,7 +4,7 @@
 
 <head th:replace="cabecera :: head">
 	<meta charset="UTF-8">
-	<title>NuevaTienda</title>
+	<title>Nueva Tienda</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -26,8 +26,10 @@
          <div class="container">
     <h1>Sistema de Registro de Nuevas Tiendas</h1>
     <hr>
-    <h2>Nueva Tienda</h2>
+   
 
+<div class="row col-md-6 offset-md-3">
+	 <h2>Nueva Tienda</h2>
     <form action="#" th:action="@{/tiendas/saveStore}" th:object="${tienda}" method="POST">
         <input type="text" th:field="*{ruc}" pattern="[0-9]+" placeholder="Ingrese Nro de RUC" class="form-control mb-4 col-4">
 
@@ -35,9 +37,9 @@
 
         <input type="text" th:field="*{direccion}" placeholder="Ingrese Direccion Actual"  class="form-control mb-4 col-4">
    
-        <button type="submit" class="btn btn-primary col-2"> Guardar Tienda</button>
+        <button type="submit" class="btn btn-primary col-auto"> Guardar Tienda</button>
     </form>
-
+</div>
     <hr>
 
    <!-- <a th:href="@{/}"> Regresar a Lista de Tiendas</a> -->
